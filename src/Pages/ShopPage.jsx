@@ -22,6 +22,7 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import CloseIcon from "@mui/icons-material/Close";
 import SortIcon from "@mui/icons-material/Sort";
 import { ProductCard } from "../Components";
+import { useNavigate } from "react-router-dom";
 
 const ShopPage = () => {
   const theme = useTheme();
@@ -30,7 +31,7 @@ const ShopPage = () => {
   const [showFilters, setShowFilters] = React.useState(!isMobile);
   const [sortBy, setSortBy] = React.useState("featured");
   const [page, setPage] = React.useState(1);
-
+  const navigate = useNavigate();
   const categories = [
     "Pooja Thali",
     "Key Chain",
@@ -59,6 +60,10 @@ const ShopPage = () => {
 
   const handlePageChange = (event, value) => {
     setPage(value);
+  };
+
+  const handleProductClick = (productId) => {
+    navigate(`/product/${productId}`);
   };
 
   const FilterSection = () => (
@@ -292,9 +297,9 @@ const ShopPage = () => {
             {/* Products */}
             <Grid container spacing={3}>
               {products.map((product) => (
-                <Grid item xs={12} sm={6} md={4} key={product.id}>
+                <div onClick={() => handleProductClick(product.id)} style={{ cursor: 'pointer' }}>
                   <ProductCard product={product} />
-                </Grid>
+                </div>
               ))}
             </Grid>
 

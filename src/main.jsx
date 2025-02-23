@@ -12,6 +12,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ShopPage from "./Pages/shopPage.jsx";
 import ContactPage from "./Pages/ContactPage.jsx"
 import AboutusPage from './Pages/AboutusPage.jsx';
+import ProductDetail from './Pages/ProductDetailPage.jsx';
 import store from './store/store.js'
 import { Provider } from "react-redux";
 
@@ -46,6 +47,13 @@ const router = createBrowserRouter([
           <AboutusPage />
         )
       },
+      {
+        path: "/product/:id",
+        element: (
+          <ProductDetail/>
+        )
+      },
+
       // {
       //   path: "/wishlist",
       //   element: (
