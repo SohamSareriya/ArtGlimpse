@@ -200,7 +200,7 @@ const ProductDetail = () => {
             
             {/* Tabbed Section for Description & More */}
             <Box>
-              <Tabs value={tabValue} onChange={handleTabChange} textColor="primary" indicatorColor="primary">
+              <Tabs value={tabValue} onChange={handleTabChange} textColor="secondary" indicatorColor="primary">
                 <Tab label="Description" />
                 <Tab label="Additional Info" />
               </Tabs>
@@ -215,7 +215,7 @@ const ProductDetail = () => {
                     </Typography>
                     <Stack direction="row" spacing={1} flexWrap="wrap">
                       {product.materials_Made?.map((material, idx) => (
-                        <Chip key={idx} label={material} size="small" variant="outlined" color="primary" />
+                        <Chip key={idx} label={material} size="medium" variant="outlined" color="secondary" />
                       ))}
                     </Stack>
                     <Typography variant="subtitle1" fontWeight="bold" mt={2} gutterBottom>
@@ -223,7 +223,7 @@ const ProductDetail = () => {
                     </Typography>
                     <Stack direction="row" spacing={1} flexWrap="wrap">
                       {product.tags?.map((tag, idx) => (
-                        <Chip key={idx} label={tag} size="small" variant="outlined" />
+                        <Chip key={idx} label={tag} size="medium" variant="outlined" />
                       ))}
                     </Stack>
                   </>

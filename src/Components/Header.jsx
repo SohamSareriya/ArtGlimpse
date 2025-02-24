@@ -137,55 +137,60 @@ const Header = () => {
       anchor="right"
       open={drawerOpen}
       onClose={() => setDrawerOpen(false)}
-      sx={{ display: { xs: 'flex', md: 'none' } }}
+      sx={{ display: { xs: "flex", md: "none" } }}
     >
       <Box
         width="250px"
         role="presentation"
         sx={{
           backgroundColor: theme.palette.primary.main,
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
           padding: 0,
-          boxShadow: 'inset 0 0 10px rgba(0, 0, 0, 0.1)',
+          boxShadow: "inset 0 0 10px rgba(0, 0, 0, 0.1)",
         }}
       >
         <Box display="flex" justifyContent="flex-end" p={2}>
-          <IconButton onClick={() => setDrawerOpen(false)} sx={{ color: theme.palette.neutral.light }}>
+          <IconButton
+            onClick={() => setDrawerOpen(false)}
+            sx={{ color: theme.palette.neutral.light }}
+          >
             <CloseIcon />
           </IconButton>
         </Box>
         <Box
           sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            width: '100%',
+            display: "flex",
+            flexDirection: "column",
+            width: "100%",
           }}
         >
-          <Link to="/" style={{ width: '100%' }}>
+          <Link to="/" style={{ width: "100%" }}>
             <StyledButton onClick={() => setDrawerOpen(false)}>
               Home
             </StyledButton>
           </Link>
-          <Link to="/shop" style={{ width: '100%' }}>
+          <Link to="/shop" style={{ width: "100%" }}>
             <StyledButton onClick={() => setDrawerOpen(false)}>
               Shop
             </StyledButton>
           </Link>
-          <Link to="/aboutUs" style={{ width: '100%' }}>
+          <Link to="/aboutUs" style={{ width: "100%" }}>
             <StyledButton onClick={() => setDrawerOpen(false)}>
               About Us
             </StyledButton>
           </Link>
-          <Link to="/contact" style={{ width: '100%' }}>
+          <Link to="/contact" style={{ width: "100%" }}>
             <StyledButton onClick={() => setDrawerOpen(false)}>
               Contact
             </StyledButton>
           </Link>
           {!isLoggedIn ? (
-            <Box sx={{ p: 2, display: 'flex', flexDirection: 'column', gap: 1 }}>
-              <Link to="/login" style={{ width: '100%' }}>
+            <Box
+              sx={{ p: 2, display: "flex", flexDirection: "column", gap: 1 }}
+            >
+              <Link to="/login" style={{ width: "100%" }}>
                 <Button
                   fullWidth
                   variant="outlined"
@@ -198,14 +203,14 @@ const Header = () => {
                   Login
                 </Button>
               </Link>
-              <Link to="/signup" style={{ width: '100%' }}>
+              <Link to="/signup" style={{ width: "100%" }}>
                 <Button
                   fullWidth
                   variant="contained"
                   onClick={() => setDrawerOpen(false)}
                   sx={{
                     backgroundColor: theme.palette.custom.highlight,
-                    color: '#fff',
+                    color: "#fff",
                   }}
                 >
                   Sign Up
@@ -215,45 +220,45 @@ const Header = () => {
           ) : (
             <Box
               sx={{
-                borderTop: '1px solid #dbd4c7',
+                borderTop: "1px solid #dbd4c7",
                 mt: 2,
                 pt: 2,
-                display: 'flex',
-                flexDirection: 'column',
+                display: "flex",
+                flexDirection: "column",
                 gap: 1,
               }}
             >
-              <Link to="/wishlist" style={{ width: '100%' }}>
+              <Link to="/wishlist" style={{ width: "100%" }}>
                 <StyledButton
                   onClick={() => setDrawerOpen(false)}
                   startIcon={<Heart size={20} />}
                   sx={{
                     borderRadius: 1,
-                    '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' },
+                    "&:hover": { backgroundColor: "rgba(0, 0, 0, 0.04)" },
                   }}
                 >
                   Wishlist
                 </StyledButton>
               </Link>
-              <Link to="/cart" style={{ width: '100%' }}>
+              <Link to="/cart" style={{ width: "100%" }}>
                 <StyledButton
                   onClick={() => setDrawerOpen(false)}
                   startIcon={<ShoppingCart size={20} />}
                   sx={{
                     borderRadius: 1,
-                    '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' },
+                    "&:hover": { backgroundColor: "rgba(0, 0, 0, 0.04)" },
                   }}
                 >
                   Cart
                 </StyledButton>
               </Link>
-              <Link to="/profile" style={{ width: '100%' }}>
+              <Link to="/profile" style={{ width: "100%" }}>
                 <StyledButton
                   onClick={() => setDrawerOpen(false)}
                   startIcon={<User size={20} />}
                   sx={{
                     borderRadius: 1,
-                    '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' },
+                    "&:hover": { backgroundColor: "rgba(0, 0, 0, 0.04)" },
                   }}
                 >
                   Profile
@@ -265,14 +270,21 @@ const Header = () => {
                   setDrawerOpen(false);
                 }}
                 sx={{
-                  mt: 1,
+                  mt: 2,
+                  mb: 1,
                   color: theme.palette.error.main,
-                  borderTop: '1px solid #dbd4c7',
-                  borderRadius: 1,
+                  borderTop: "1px solid #e0e0e0",
+                  borderRadius: 0,
                   paddingTop: 2,
-                  '&:hover': {
-                    backgroundColor: 'rgba(211, 47, 47, 0.04)',
+                  paddingBottom: 1.5,
+                  width: "100%",
+                  justifyContent: "flex-start",
+                  fontWeight: 500,
+                  transition: "all 0.2s ease-in-out",
+                  "&:hover": {
+                    backgroundColor: "rgba(211, 47, 47, 0.08)",
                     color: theme.palette.error.dark,
+                    paddingLeft: 1.5,
                   },
                 }}
               >

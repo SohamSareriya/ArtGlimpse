@@ -1,4 +1,4 @@
-import React, { memo, useState } from "react";
+import React from "react";
 import {
   Box,
   Container,
@@ -9,48 +9,66 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
-  Chip,
   Divider,
   Button,
-  Rating,
-  Select,
-  MenuItem,
   FormControl,
   InputLabel,
+  Select,
+  MenuItem,
+  ListItemIcon,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
-
-// Dummy order data
-const dummyOrders = [
-  {
-    id: "E202302347816",
-    status: "Delivered",
-    deliveredOn: "Fri, 2 Feb",
-    productName: "Men's Jacket",
-  },
-  {
-    id: "FNY674454763",
-    status: "Delivered",
-    deliveredOn: "Sun, 5 Feb",
-    productName: "Women's Kurti",
-  },
-];
+import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
+import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
+import PersonAddAltOutlinedIcon from "@mui/icons-material/PersonAddAltOutlined";
+import HeadsetMicOutlinedIcon from "@mui/icons-material/HeadsetMicOutlined";
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import PaymentOutlinedIcon from "@mui/icons-material/PaymentOutlined";
+import { useNavigate } from "react-router-dom";
 
 const SideMenuPaper = styled(Paper)(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
   padding: theme.spacing(2),
   minWidth: 220,
+  // Modified shadow to only appear on left and right sides
+  boxShadow: "4px 0 6px -2px rgba(0,0,0,0.1), -4px 0 6px -2px rgba(0,0,0,0.1)",
+  height: "100%", // Make sure it extends from top to bottom
   [theme.breakpoints.down("sm")]: {
     minWidth: "auto",
   },
 }));
 
+const StyledListItemButton = styled(ListItemButton)(({ theme }) => ({
+  borderRadius: 0,
+  marginBottom: theme.spacing(0.5),
+  "&.Mui-selected": {
+    backgroundColor: "rgba(0, 0, 0, 0.08)",
+    borderLeft: "3px solid",
+    borderColor: theme.palette.primary.main,
+    paddingLeft: theme.spacing(2) - 3, // Adjust padding to account for border
+    "&:hover": {
+      backgroundColor: "rgba(0, 0, 0, 0.08)",
+    },
+  },
+  "&:hover": {
+    backgroundColor: theme.palette.action.hover,
+  },
+}));
+
 const ProfileDashboard = () => {
   // Example: controlling the "Last x months" filter
-  const [timeFilter, setTimeFilter] = useState("6");
+  const [timeFilter, setTimeFilter] = React.useState("6");
+  const [orders, setOrders] = React.useState([]);
+  const [activeTab, setActiveTab] = React.useState("Orders & Credits");
+  const navigate = useNavigate();
 
   const handleTimeFilterChange = (event) => {
     setTimeFilter(event.target.value);
+  };
+
+  const handleTabClick = (tabName) => {
+    setActiveTab(tabName);
   };
 
   return (
@@ -59,76 +77,116 @@ const ProfileDashboard = () => {
         <Grid container spacing={4}>
           {/* Left Column: Side Menu */}
           <Grid item xs={12} md={3}>
-            <SideMenuPaper elevation={1}>
+            <SideMenuPaper elevation={0}>
+              {" "}
+              {/* Changed to elevation={0} to remove default shadow */}
               <Typography variant="h6" sx={{ mb: 1 }}>
                 My Account
               </Typography>
               <List disablePadding>
                 <ListItem disablePadding>
-                  <ListItemButton>
-                    <ListItemText primary="Orders & Credits" />
-                    <Chip
-                      label="New"
-                      color="error"
-                      size="small"
-                      sx={{ ml: 1 }}
+                  <StyledListItemButton
+                    selected={activeTab === "Orders & Credits"}
+                    onClick={() => handleTabClick("Orders & Credits")}
+                  >
+                    <ListItemIcon sx={{ minWidth: 40 }}>
+                      <ReceiptOutlinedIcon fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary="Orders & Credits"
+                      primaryTypographyProps={{
+                        fontWeight:
+                          activeTab === "Orders & Credits" ? 600 : 400,
+                      }}
                     />
-                  </ListItemButton>
+                  </StyledListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
-                  <ListItemButton>
-                    <ListItemText primary="AJIO Wallet" />
-                    <Chip
-                      label="New"
-                      color="error"
-                      size="small"
-                      sx={{ ml: 1 }}
+                  <StyledListItemButton
+                    selected={activeTab === "Invite Friends"}
+                    onClick={() => handleTabClick("Invite Friends")}
+                  >
+                    <ListItemIcon sx={{ minWidth: 40 }}>
+                      <PersonAddAltOutlinedIcon fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary="Invite Friends"
+                      primaryTypographyProps={{
+                        fontWeight: activeTab === "Invite Friends" ? 600 : 400,
+                      }}
                     />
-                  </ListItemButton>
+                  </StyledListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
-                  <ListItemButton>
-                    <ListItemText primary="Invite Friends" />
-                    <Chip
-                      label="New"
-                      color="error"
-                      size="small"
-                      sx={{ ml: 1 }}
+                  <StyledListItemButton
+                    selected={activeTab === "Customer Care"}
+                    onClick={() => handleTabClick("Customer Care")}
+                  >
+                    <ListItemIcon sx={{ minWidth: 40 }}>
+                      <HeadsetMicOutlinedIcon fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary="Customer Care"
+                      primaryTypographyProps={{
+                        fontWeight: activeTab === "Customer Care" ? 600 : 400,
+                      }}
                     />
-                  </ListItemButton>
-                </ListItem>
-                <ListItem disablePadding>
-                  <ListItemButton>
-                    <ListItemText primary="My Rewards" />
-                  </ListItemButton>
-                </ListItem>
-                <ListItem disablePadding>
-                  <ListItemButton>
-                    <ListItemText primary="Customer Care" />
-                  </ListItemButton>
+                  </StyledListItemButton>
                 </ListItem>
               </List>
-
               <Divider sx={{ my: 2 }} />
-
               <Typography variant="h6" sx={{ mb: 1 }}>
                 Profile
               </Typography>
               <List disablePadding>
                 <ListItem disablePadding>
-                  <ListItemButton>
-                    <ListItemText primary="Personal Information" />
-                  </ListItemButton>
+                  <StyledListItemButton
+                    selected={activeTab === "Personal Information"}
+                    onClick={() => handleTabClick("Personal Information")}
+                  >
+                    <ListItemIcon sx={{ minWidth: 40 }}>
+                      <PersonOutlineOutlinedIcon fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary="Personal Information"
+                      primaryTypographyProps={{
+                        fontWeight:
+                          activeTab === "Personal Information" ? 600 : 400,
+                      }}
+                    />
+                  </StyledListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
-                  <ListItemButton>
-                    <ListItemText primary="Address Book" />
-                  </ListItemButton>
+                  <StyledListItemButton
+                    selected={activeTab === "Address"}
+                    onClick={() => handleTabClick("Address")}
+                  >
+                    <ListItemIcon sx={{ minWidth: 40 }}>
+                      <HomeOutlinedIcon fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary="Address"
+                      primaryTypographyProps={{
+                        fontWeight: activeTab === "Address" ? 600 : 400,
+                      }}
+                    />
+                  </StyledListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
-                  <ListItemButton>
-                    <ListItemText primary="Payments" />
-                  </ListItemButton>
+                  <StyledListItemButton
+                    selected={activeTab === "Payments"}
+                    onClick={() => handleTabClick("Payments")}
+                  >
+                    <ListItemIcon sx={{ minWidth: 40 }}>
+                      <PaymentOutlinedIcon fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary="Payments"
+                      primaryTypographyProps={{
+                        fontWeight: activeTab === "Payments" ? 600 : 400,
+                      }}
+                    />
+                  </StyledListItemButton>
                 </ListItem>
               </List>
             </SideMenuPaper>
@@ -140,12 +198,7 @@ const ProfileDashboard = () => {
               <Typography variant="h4" fontWeight="bold" sx={{ mb: 1 }}>
                 My Orders
               </Typography>
-              <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
-                Track your open orders & view the summary of your past orders
-              </Typography>
-
-              {/* Filter Row */}
-              <Box
+              {/* <Box
                 sx={{
                   display: "flex",
                   justifyContent: "space-between",
@@ -154,7 +207,7 @@ const ProfileDashboard = () => {
                   mb: 3,
                 }}
               >
-                <FormControl size="small" sx={{ minWidth: 150 }}>
+                {/* <FormControl size="small" sx={{ minWidth: 150 }}>
                   <InputLabel>Last x months</InputLabel>
                   <Select
                     value={timeFilter}
@@ -166,54 +219,54 @@ const ProfileDashboard = () => {
                     <MenuItem value="9">Last 9 months</MenuItem>
                     <MenuItem value="12">Last 12 months</MenuItem>
                   </Select>
-                </FormControl>
-              </Box>
+                </FormControl> */}
+              {/* </Box> */}
 
-              {/* Orders List */}
-              {dummyOrders.map((order) => (
-                <Paper
-                  key={order.id}
-                  elevation={0}
+              {/* Empty Orders State */}
+              {orders.length === 0 && (
+                <Box
                   sx={{
-                    p: 2,
-                    mb: 3,
-                    border: "1px solid",
-                    borderColor: (theme) => theme.palette.divider,
-                    borderRadius: 2,
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    textAlign: "center",
+                    py: 8,
+                    px: 2,
                   }}
                 >
-                  <Typography
-                    variant="body2"
-                    fontWeight="bold"
-                    color="text.secondary"
-                  >
-                    Order ID: {order.id}
+                  <ShoppingBagOutlinedIcon
+                    sx={{ fontSize: 80, color: "text.disabled", mb: 3 }}
+                  />
+                  <Typography variant="h5" fontWeight="bold" sx={{ mb: 2 }}>
+                    YOUR ORDER HISTORY IS EMPTY
                   </Typography>
-                  <Box sx={{ mt: 1 }}>
-                    <Typography variant="body1" sx={{ fontWeight: 600 }}>
-                      {order.status}
-                    </Typography>
-                    <Typography variant="caption" color="text.secondary">
-                      on {order.deliveredOn}
-                    </Typography>
-                  </Box>
-                  <Box sx={{ mt: 1, display: "flex", gap: 2 }}>
-                    <Button
-                      variant="outlined"
-                      size="small"
-                      sx={{ textTransform: "none" }}
-                    >
-                      Exchange Order
-                    </Button>
-                    <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                      <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                        Rate this Product:
-                      </Typography>
-                      <Rating size="small" />
-                    </Box>
-                  </Box>
-                </Paper>
-              ))}
+                  <Typography
+                    variant="body1"
+                    color="text.secondary"
+                    sx={{ mb: 4, maxWidth: 600 }}
+                  >
+                    Looks like you haven't placed any orders yet. Start
+                    exploring and shop for your favorite products.
+                  </Typography>
+                  <Button
+                    variant="contained"
+                    size="large"
+                    onClick={() => navigate("/shop")}
+                    sx={{
+                      textTransform: "none",
+                      px: 4,
+                      bgcolor: "#f5f5dc",
+                      color: "black", // Or theme.palette.text.primary if using a theme
+                      "&:hover": {
+                        bgcolor: "#e6e6d1",
+                      },
+                    }}
+                  >
+                    Explore Products
+                  </Button>
+                </Box>
+              )}
             </Box>
           </Grid>
         </Grid>
@@ -222,4 +275,4 @@ const ProfileDashboard = () => {
   );
 };
 
-export default memo(ProfileDashboard);
+export default ProfileDashboard;
