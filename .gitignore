@@ -22,29 +22,5 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-public/assets/Screenshot 2025-01-12 144638.png
-src/assets/Screenshot 2025-01-12 144553.png
-src/assets/Screenshot 2025-01-12 144750.png
-src/assets/Screenshot 2025-01-12 144710.png
-src/assets/Screenshot 2025-01-12 144619.png
-src/assets/Screenshot 2025-01-12 144855.png
-src/assets/Screenshot 2025-01-12 144830.png
-src/assets/DALL·E 2025-01-12 19.48.41 - A collection of handcrafted artisanal items displayed beautifully on a wooden table. The items include intricate resin crafts, hand-painted pottery, w.webp
-src/assets/Screenshot 2025-01-12 144638.png
-public/vite.svg
-src/assets/Screenshot 2025-01-12 182237.png
-src/assets/Screenshot 2025-01-12 182251.png
-public/vite.svg
-public/assets/WhatsApp Image 2025-01-14 at 12.19.10 AM.jpeg
-src/assets/WhatsApp Image 2025-01-14 at 12.19.10 AM.jpeg
-public/assets/react.svg
-public/assets/Screenshot 2025-01-12 144553.png
-public/assets/Screenshot 2025-01-12 144619.png
-public/assets/Screenshot 2025-01-12 144710.png
 .gitignore
-public/assets/Screenshot 2025-01-12 144750.png
-public/assets/Screenshot 2025-01-12 144830.png
-public/assets/Screenshot 2025-01-12 144855.png
-public/assets/Screenshot 2025-01-12 182237.png
-public/assets/Screenshot 2025-01-12 182251.png
 .env
