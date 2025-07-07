@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from 'react-redux';
 import { logout } from './store/authSlice';
 import axios from 'axios';
+import conf from './conf';
 
 function App() {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ function App() {
       if (storedUser) {
         const { token } = JSON.parse(storedUser);
         try {
-          await axios.get('http://localhost:8081/api/auth/validate', {
+          await axios.get(`${conf.apiBaseUrl}/api/auth/validate`, {
             headers: { Authorization: `Bearer ${token}` },
           });
         } catch (error) {

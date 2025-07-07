@@ -16,6 +16,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../../Styles/theme';
+import conf from '../../conf';
 
 const Chatbot = () => {
   const [messages, setMessages] = useState([
@@ -64,7 +65,7 @@ const Chatbot = () => {
     setIsTyping(true);
     
     try {
-      const response = await fetch('http://localhost:8081/api/chat', {
+      const response = await fetch(`${conf.apiBaseUrl}/api/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: input })

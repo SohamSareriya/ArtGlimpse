@@ -18,7 +18,6 @@ function Login() {
     const login = async (data) => {
         try {
             setError(null);
-            console.log("data", data);
             const userData = await authService.login(data.email, data.password);
             dispatch(loginUser(userData));
             navigate('/');

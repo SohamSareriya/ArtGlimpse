@@ -1,5 +1,7 @@
-import axios from './api'; // use your configured axios instance
-const API_URL = 'http://localhost:8081/orders';
+import axios from './api';
+import conf from '../conf';
+
+const API_URL = `${conf.apiBaseUrl}/orders`;
 
 const orderService = {
     createOrder: async (orderData) => {

@@ -7,7 +7,6 @@ export const fetchProfile = createAsyncThunk(
     async ({ userId }, thunkAPI) => {
         try {
             const data = await userService.getProfile(userId);
-            console.log("data in fetchprofile", data);
             return data;
         } catch (error) {
             return thunkAPI.rejectWithValue(
@@ -23,7 +22,6 @@ export const updateProfile = createAsyncThunk(
     async ({ userId, profileData }, thunkAPI) => {
         try {
             const data = await userService.updateProfile(userId, profileData);
-            console.log("data in updateprofile", data);
             return data;
         } catch (error) {
             return thunkAPI.rejectWithValue(
