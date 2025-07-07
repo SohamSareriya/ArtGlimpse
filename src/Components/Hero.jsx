@@ -9,6 +9,7 @@ import {
     useTheme,
 } from "@mui/material";
 import { Link } from "react-router-dom";
+import heroSrc from '../assets/hero.jpeg';
 
 const Hero = () => {
     const theme = useTheme();
@@ -24,7 +25,7 @@ const Hero = () => {
                 justifyContent: "center",
                 overflow: "hidden",
                 mt: 12,
-                backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("src/assets/hero.jpeg")`,
+                backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("${heroSrc}")`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 color: "#fff",
