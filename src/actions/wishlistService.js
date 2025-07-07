@@ -1,11 +1,12 @@
 import axios from './api'; // use the configured axios instance
-const API_URL = "http://localhost:8081/wishlist";
+import conf from '../conf';
+
+const API_URL = `${conf.apiBaseUrl}/wishlist`;
 
 const wishlistService = {
     getWishlist: async (userId) => {
         try {
             const response = await axios.get(`${API_URL}/${userId}`);
-            console.log("Wishlist response:", response.data);
             return response.data;
         } catch (error) {
             console.error("Error fetching wishlist", error);
@@ -16,7 +17,6 @@ const wishlistService = {
     addToWishlist: async ({ userId, productId }) => {
         try {
             const response = await axios.post(API_URL, { userId, productId });
-            console.log("Add to wishlist response:", response.data);
             return response.data;
         } catch (error) {
             console.error("Error adding to wishlist", error);
@@ -27,7 +27,6 @@ const wishlistService = {
     removeFromWishlist: async ({ userId, productId }) => {
         try {
             const response = await axios.delete(`${API_URL}/${userId}/${productId}`);
-            console.log("Remove from wishlist response:", response.data);
             return response.data;
         } catch (error) {
             console.error("Error removing from wishlist", error);

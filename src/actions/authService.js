@@ -1,11 +1,12 @@
 import axios from './api'; // Use the configured axios instance
-const API_URL = 'http://localhost:8081/api/auth';
+import conf from '../conf';
+
+const API_URL = `${conf.apiBaseUrl}/api/auth`;
 
 const authService = {
     login: async (email, password) => {
         try {
             const response = await axios.post(`${API_URL}/login`, { email, password });
-            console.log("Login response:", response);
             if (response.data.token) {
                 // Store user data locally
                 localStorage.setItem('user', JSON.stringify(response.data));
@@ -13,7 +14,6 @@ const authService = {
             }
             return response.data;
         } catch (error) {
-            console.log("Login error:", error);
             throw error.response?.data || 'Failed to login';
         }
     },
@@ -21,7 +21,6 @@ const authService = {
     signup: async (username, email, password) => {
         try {
             const response = await axios.post(`${API_URL}/signup`, { username, email, password });
-            console.log("Signup response:", response);
             // Immediately log in the user after signup
             const loginResponse = await authService.login(email, password);
             return loginResponse;

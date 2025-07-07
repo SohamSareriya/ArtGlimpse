@@ -1,6 +1,7 @@
 import axios from "axios";
+import conf from "../conf";
 
-const API_URL = "http://localhost:8081/products";
+const API_URL = `${conf.apiBaseUrl}/products`;
 
 const productService = {
     // Fetch all products
@@ -9,7 +10,6 @@ const productService = {
             const response = await axios.get(API_URL);
             return response.data;
         } catch (error) {
-            console.error("Error fetching products", error);
             throw error.response?.data || "Failed to fetch products";
         }
     },
@@ -20,7 +20,6 @@ const productService = {
             const response = await axios.get(`${API_URL}/${id}`);
             return response.data;
         } catch (error) {
-            console.error("Error fetching product", error);
             throw error.response?.data || "Failed to fetch product";
         }
     },
@@ -31,7 +30,6 @@ const productService = {
             const response = await axios.post(API_URL, productData);
             return response.data;
         } catch (error) {
-            console.error("Error creating product", error);
             throw error.response?.data || "Failed to create product";
         }
     },
@@ -42,7 +40,6 @@ const productService = {
             const response = await axios.put(`${API_URL}/${id}`, productData);
             return response.data;
         } catch (error) {
-            console.error("Error updating product", error);
             throw error.response?.data || "Failed to update product";
         }
     },
@@ -53,7 +50,6 @@ const productService = {
             const response = await axios.delete(`${API_URL}/${id}`);
             return response.data;
         } catch (error) {
-            console.error("Error deleting product", error);
             throw error.response?.data || "Failed to delete product";
         }
     },

@@ -15,7 +15,6 @@ export const fetchProducts = createAsyncThunk(
     async (_, thunkAPI) => {
         try {
             const data = await productService.getProducts();
-            console.log("data", data);
             return data;
         } catch (error) {
             return thunkAPI.rejectWithValue(error);
@@ -93,7 +92,6 @@ const productSlice = createSlice({
             .addCase(fetchProducts.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.products = action.payload;
-                console.log("action.payload", action.payload);
             })
             .addCase(fetchProducts.rejected, (state, action) => {
                 state.isLoading = false;
