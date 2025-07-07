@@ -9,10 +9,10 @@ import { createPaymentIntent } from '../actions/paymentService';
 import { FormField } from './index';
 import { useTheme } from '@mui/material';
 import { useForm } from 'react-hook-form';
-import visaImg from '../../public/assets/visa.svg';
-import mastercardImg from '../../public/assets/mastercard.svg';
-import amexImg from '../../public/assets/amex.svg';
-import discoverImg from '../../public/assets/discover.svg';
+import visaImg from '../assets/visa.svg';
+import mastercardImg from '../assets/mastercard.svg';
+import amexImg from '../assets/amex.svg';
+import discoverImg from '../assets/discover.svg';
 
 const CheckoutPayment = forwardRef(({ totalPrice }, ref) => {
     const amount = Math.round(totalPrice * 100);
